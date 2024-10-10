@@ -1,0 +1,40 @@
+version: '3.9'
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: feed-microservice
+    depends_on:
+      - postgres
+    networks:
+      - api-network
+    ports:
+      - '3000:3000'
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/postgres
+      - NODE_ENV=development
+      - PORT=3000
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+  postgres:
+    image: postgres:14.1-alpine
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    networks:
+      - api-network
+    volumes:
+      - db:/var/lib/postgresql/data
+
+networks:
+  api-network:
+
+volumes:
+  db:
