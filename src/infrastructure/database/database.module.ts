@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -14,8 +15,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         password: config.get<string>('DATABASE_PASSWORD'),
         host: config.get<string>('DATABASE_HOST'),
         database: config.get<string>('DATABASE'),
-        autoLoadEntities: true,
-        synchronize: true,
+        synchronize: false,
+        logging: false,
+        logger: 'file',
+        migrationsRun: false,
+        entities: ['dist/**/*.entity{.ts,.js}'],
+        migrations: [`${__dirname}/migrations/**/*.{.ts,.js}`],
       }),
     }),
   ],

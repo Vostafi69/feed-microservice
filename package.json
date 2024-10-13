@@ -18,7 +18,16 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "up": "docker-compose down && docker-compose up --build"
+    "up": "docker-compose down && docker-compose up --build",
+    "typeorm": "typeorm-ts-node-commonjs",
+    "schema:sync": "yarn run typeorm schema:sync",
+    "typeorm:cache": "yarn run typeorm cache:clear",
+    "schema:drop": "yarn run typeorm -d ./src/main/config/migrations/data-source.ts",
+    "migration:create": "yarn run typeorm migration:create ./src/infrastructure/database/migrations/init",
+    "migration:generate": "yarn run typeorm migration:generate ./src/infrastructure/database/migrations/init -d ./src/main/config/migrations/data-source.ts",
+    "migration:run": "yarn run typeorm migration:run -d ./src/main/config/migrations/data-source.ts",
+    "migration:show": "yarn run typeorm migration:show -d ./src/main/config/migrations/data-source.ts",
+    "migration:revert": "yarn run typeorm migration:revert -d ./src/main/config/migrations/data-source.ts"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
