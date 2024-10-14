@@ -6,6 +6,7 @@ export const swaggerConfig = (app: NestExpressApplication): void => {
     .setTitle('feed-api')
     .setDescription('The feed api')
     .setVersion('1.0')
+    .addServer('v1')
     .addTag('feed')
     .build();
   const document = SwaggerModule.createDocument(app, config);
