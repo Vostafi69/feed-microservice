@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { PageMetaDto } from '../../../dto/page-meta.dto';
 import { PageDto } from '../../../dto/page.dto';
+import { PostDto } from '../../dto/post.dto';
 
 @QueryHandler(GetPostsQuery)
 export class GetPostsHandler implements IQueryHandler<GetPostsQuery> {
@@ -13,7 +14,7 @@ export class GetPostsHandler implements IQueryHandler<GetPostsQuery> {
     private readonly _postRepository: Repository<PostEntity>,
   ) {}
 
-  async execute(query: GetPostsQuery): Promise<PageDto<PostEntity>> {
+  async execute(query: GetPostsQuery): Promise<PageDto<PostDto>> {
     const skip = query.limit * query.offset;
 
     const [posts, count] = await this._postRepository.findAndCount({

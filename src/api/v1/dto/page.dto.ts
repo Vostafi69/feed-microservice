@@ -1,10 +1,11 @@
 import { IsArray } from 'class-validator';
 import { PageMetaDto } from './page-meta.dto';
 import { ApiProperty } from '@nestjs/swagger';
+import { PostDto } from '../post/dto/post.dto';
 
 export class PageDto<T> {
   @IsArray()
-  @ApiProperty({ isArray: true })
+  @ApiProperty({ type: () => PostDto, isArray: true })
   readonly data: T[];
 
   @ApiProperty({ type: () => PageMetaDto })
