@@ -29,6 +29,6 @@ export class GetPostsHandler implements IQueryHandler<GetPostsQuery> {
 
     const pageMetaDto = new PageMetaDto(query, count);
 
-    return new PageDto(posts, pageMetaDto);
+    return new PageDto(pageMetaDto, posts);
   }
 }
