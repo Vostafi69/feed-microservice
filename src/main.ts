@@ -14,6 +14,7 @@ async function bootstrap() {
   const port = config.get<number>('PORT');
 
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
+  app.setGlobalPrefix('v1');
 
   await app.listen(port, () =>
     logger.log(`Server is running at: http://localhost:${port}`),
