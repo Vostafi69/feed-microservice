@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { Logger, ValidationPipe } from '@nestjs/common';
+import { Logger, ValidationPipe, VersioningType } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { ConfigService } from '@nestjs/config';
 import { swaggerConfig } from './main/config/docs/swagger.config';
@@ -14,7 +14,11 @@ async function bootstrap() {
   const port = config.get<number>('PORT');
 
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
-  app.setGlobalPrefix('v1');
+  app.enableVersioning({
+    type: VersioningType.URI,
+    defaultVersion: '1',
+    prefix: 'api/v',
+  });
 
   await app.listen(port, () =>
     logger.log(`Server is running at: http://localhost:${port}`),

@@ -1,12 +1,20 @@
-import { Controller, Get, HttpCode, HttpStatus, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Query,
+  Version,
+} from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
 import { GetPostsQuery } from './queries/impl/get-posts.query';
 import { PageOptionsDto } from '../dto/page-options.dto';
 import { PageDto } from '../dto/page.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { PostDto } from './dto/post.dto';
-import { ApiPaginatedResponse } from 'src/main/config/docs/api-paginated-response';
+import { ApiPaginatedResponse } from 'src/main/config/docs/decorators/api-paginated-response';
 
+Version('1');
 @Controller('posts')
 @ApiTags('posts')
 export class PostController {
