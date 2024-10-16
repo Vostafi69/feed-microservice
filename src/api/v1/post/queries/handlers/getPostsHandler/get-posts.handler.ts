@@ -1,11 +1,11 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { GetPostsQuery } from '../impl/get-posts.query';
+import { GetPostsQuery } from '../../impl/get-posts.query';
 import { PostEntity } from 'src/domain/entities/post.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { PageMetaDto } from '../../../dto/page-meta.dto';
-import { PageDto } from '../../../dto/page.dto';
-import { PostDto } from '../../dto/post.dto';
+import { PageMetaDto } from '../../../../dto/page-meta.dto';
+import { PageDto } from '../../../../dto/page.dto';
+import { PostDto } from '../../../dto/post.dto';
 
 @QueryHandler(GetPostsQuery)
 export class GetPostsHandler implements IQueryHandler<GetPostsQuery> {
