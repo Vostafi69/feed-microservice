@@ -3,6 +3,8 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  Param,
+  ParseIntPipe,
   Query,
   Version,
 } from '@nestjs/common';
@@ -13,6 +15,7 @@ import { PageDto } from '../dto/page.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { PostDto } from './dto/post.dto';
 import { ApiPaginatedResponse } from 'src/main/config/docs/decorators/api-paginated-response';
+import { GetPostByIdQuery } from './queries/impl/get-post-byId.query';
 
 Version('1');
 @Controller('posts')
@@ -20,12 +23,18 @@ Version('1');
 export class PostController {
   constructor(private readonly _queryBus: QueryBus) {}
 
-  @Get('all')
+  @Get()
   @HttpCode(HttpStatus.OK)
   @ApiPaginatedResponse(PostDto)
-  async getAll(
+  async findAll(
     @Query() pageOptionsDto: PageOptionsDto,
   ): Promise<PageDto<PostDto>> {
     return await this._queryBus.execute(new GetPostsQuery(pageOptionsDto));
+  }
+
+  @Get(':id')
+  @HttpCode(HttpStatus.OK)
+  async find(@Param('id', ParseIntPipe) id: number): Promise<PostDto> {
+    return await this._queryBus.execute(new GetPostByIdQuery(id));
   }
 }
