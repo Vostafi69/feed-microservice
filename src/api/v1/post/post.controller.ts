@@ -18,7 +18,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { PostDto } from './dto/post.dto';
 import { ApiPaginatedResponse } from 'src/main/config/docs/decorators/api-paginated-response';
 import { GetPostByIdQuery } from './queries/impl/get-post-byId.query';
-import { AddPostDto } from '../dto/add-post.dto';
+import { AddPostDto } from './dto/add-post.dto';
 import { AddPostCommand } from './commands/impl/add-post.command';
 
 Version('1');

@@ -1,4 +1,4 @@
-import { AddPostDto } from 'src/api/v1/dto/add-post.dto';
+import { AddPostDto } from 'src/api/v1/post/dto/add-post.dto';
 
 export class AddPostCommand {
   readonly content: string;
